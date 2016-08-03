@@ -15,9 +15,13 @@ import java.util.ArrayList;
 public class ScriptVector {
     public ArrayList<Note> notes = new ArrayList();
     public int pos;
-    public void load()
+    public void start()
     {
         pos = -1;
+    }
+    public void load()
+    {
+        start();
         notes.clear();
         String s = "C#4 D4 Eb4 F4 G4 C3 F#4    F#3";
         ArrayList<String> v1 = ScriptReader.tokenize(s);

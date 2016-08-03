@@ -361,7 +361,8 @@ public class InlinePanel extends JPanel implements ActionListener
 	
 	public void startGame()
 	{
-		currentSpeed = sBar.tempoSlider.getValue();
+		currentSpeed = Integer.parseInt(sBar.tempoLabel.getText()); 
+                sBar.tempoSlider.setValue(currentSpeed);
 		piano.reset(false);
 		gameNotes.clear();
 		gameBar.precisionCnt.setText("");
@@ -644,7 +645,8 @@ public class InlinePanel extends JPanel implements ActionListener
 	private class InlineGameThread extends Thread 
 	{
 		boolean needNewNote = true;
-		int noteXincrement = (currentSpeed < 121)?1:2; // above 120 the increment is of 2 pixels
+		int noteXincrement = (currentSpeed < 121)?1:2;
+                
 		int sleepVal = 0;
 		int marginX = inlineStaff.getStaffWidth();
 
@@ -653,7 +655,15 @@ public class InlinePanel extends JPanel implements ActionListener
 			if (currentSpeed <= 120)
 				sleepVal = ((120 - currentSpeed) * 10 / 80);
 			else
-				sleepVal = ((240 - currentSpeed) * 10 / 80);
+				if (currentSpeed <= 200)
+                                    sleepVal = ((200 - currentSpeed) * 10 / 80);
+                                    else
+				if (currentSpeed <= 360)
+                                    sleepVal = ((360 - currentSpeed) * 10 / 80);
+                                if (currentSpeed > 200) 
+                                        noteXincrement = 3; 
+                                if (currentSpeed > 200) 
+                                        sleepVal = sleepVal*4/9;
 			if (gameType == appPrefs.INLINE_MORE_NOTES)
 			{
 				noteXincrement = noteXincrement - (noteXincrement * 2); // change sign here
@@ -669,6 +679,7 @@ public class InlinePanel extends JPanel implements ActionListener
 		public void run() 
 		{
                     //ScriptVector.INSTANCE.load(); //0xDE
+                    ScriptVector.INSTANCE.start();
                     while (gameStarted) 
 			{
 				try
