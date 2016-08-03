@@ -57,7 +57,7 @@ public class SmartBar extends JPanel implements ActionListener, ChangeListener
 	RoundPanel tempoContainer;
 	public JPanel tempoPanel;
 	public JSlider tempoSlider;
-	private JTextField tempoLabel;
+	public JTextField tempoLabel;
 	public JCheckBox metronomeCheckBox;
 	
 	public RoundedButton clefNoteBtn;
@@ -121,6 +121,8 @@ public class SmartBar extends JPanel implements ActionListener, ChangeListener
 		// create tempo container with tempo scroller and metronome check box
 		tempoContainer = new RoundPanel();
 		tempoContainer.setBackground(compColor);
+                //tempoContainer.setPreferredSize(new Dimension(300, 96));
+                //((FlowLayout)tempoContainer.getLayout()).setVgap(16);
 		((FlowLayout)tempoContainer.getLayout()).setHgap(7);
 
 		tempoPanel = new JPanel(); //new FlowLayout(FlowLayout.CENTER, 20, -2));
@@ -128,14 +130,14 @@ public class SmartBar extends JPanel implements ActionListener, ChangeListener
 		Border defBorder = UIManager.getBorder(tempoPanel);
 		tempoPanel.setBorder(BorderFactory.createTitledBorder(defBorder, appBundle.getString("_speed"), TitledBorder.LEADING, TitledBorder.TOP));
 		tempoPanel.setBackground(compColor);
-		tempoPanel.setPreferredSize(new Dimension(230, 80));
+		tempoPanel.setPreferredSize(new Dimension(270, 80));
 
 		if (inline == true)
 		{
 			if (isEarTraining == false)
 			{
 				exType = "E2";
-                                tempoSlider = new JSlider(JSlider.HORIZONTAL, 30, 240, 60);
+                                tempoSlider = new JSlider(JSlider.HORIZONTAL, 30, 360, 60);
 				tempoLabel = new JTextField("60");
 			}
 			else
@@ -144,7 +146,7 @@ public class SmartBar extends JPanel implements ActionListener, ChangeListener
                                 tempoSlider = new JSlider(JSlider.HORIZONTAL, 1, 12, 6);
 				tempoLabel = new JTextField("6 Sec.");
 			}
-			tempoLabel.setBounds(85, 22, 60, 25);
+			tempoLabel.setBounds(110, 22, 60, 25);
 		}
 		else
 		{
@@ -153,7 +155,7 @@ public class SmartBar extends JPanel implements ActionListener, ChangeListener
 			tempoLabel = new JTextField("80 BPM");
 			tempoLabel.setBounds(25, 22, 65, 25);
 		}
-		tempoSlider.setBounds(20, 45, 190, 25);
+		tempoSlider.setBounds(22, 45, 230, 25);
                 int speed = Integer.parseInt(appPrefs.getProperty(exType+"Speed"));
                 if (speed > 0) {
                     tempoSlider.setValue(speed);
