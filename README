@@ -1,0 +1,17 @@
+One of the most important additions to the forked Score Date is game scripting. 
+Normally  in the games like “Note Reading” Score Date generates notes at random. 
+You can change this by loading a script (exercise) which consists of the note sequence. 
+After this the program will play notes from the sequence rather than randomly. 
+When the sequence comes to an end it starts from the beginning.
+The script is a simple text file, which you load with File menu, with tokens indicating notes to be played, separated by space characters. 
+Each note token consists of the capital Latin letter indicating the note (C,D,E,F,G,A,B), the alteration sign (# or b) if needed and an octave number. 
+So middle C is written as C4.
+Each alteration sign refers only to the note it appears with.
+C-major scale is written like this:
+C4 D4 E4 F4 G4 A4 B4
+And D-major gamma like this:
+D4 E4 F#4 G4 A4 B4 C#5
+
+----
+
+Andrei Borovsky, andrei.borovsky@gmail.com
