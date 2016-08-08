@@ -484,7 +484,11 @@ public class InlinePanel extends JPanel implements ActionListener
 			if (gameType != appPrefs.GAME_STOPPED)
 			{
 			  userNotes.add(pitch);
-			  boolean match = checkGameStatus(gameNotes, userNotes);
+			  boolean match;
+                          if (ScriptVector.INSTANCE.notes.isEmpty())
+                                        match  = checkGameStatus(gameNotes, userNotes);
+                          else
+                              match = pitch == ScriptVector.INSTANCE.currentNote().pitch;
 			  if (match == true)
 			  {
 				updateGameStats(1);
@@ -753,10 +757,14 @@ public class InlinePanel extends JPanel implements ActionListener
 				catch (Exception e) {  }
 			}
 		}
-
+        
+                private boolean playingScript()
+                {
+                    return !(ScriptVector.INSTANCE.notes.isEmpty());
+                }
         private void createNewNote() {
             //0xDE
-            if(ScriptVector.INSTANCE.notes.size()  > 0) {
+            if (playingScript()) {
                 readScriptNote();
             return;
             }

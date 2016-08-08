@@ -37,7 +37,14 @@ public class ScriptVector {
     public int index()
     {
         pos++;
-        return (pos)%notes.size();
+        int i = (pos)%notes.size();
+        curNote = notes.get(i);
+        return i;
+    }
+    private Note curNote;
+    public Note currentNote()
+    {
+        return curNote;
     }
     public static final ScriptVector INSTANCE = new ScriptVector();
 }
