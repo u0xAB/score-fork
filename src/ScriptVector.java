@@ -38,13 +38,17 @@ public class ScriptVector {
     {
         pos++;
         int i = (pos)%notes.size();
-        curNote = notes.get(i);
+        curPitch = notes.get(i).pitch;
         return i;
     }
-    private Note curNote;
-    public Note currentNote()
+    private int curPitch;
+    public int currentPitch()
     {
-        return curNote;
+        return curPitch;
+    }
+    public void setCurrentPitch(int pitch)
+    {
+        curPitch = pitch;
     }
     public static final ScriptVector INSTANCE = new ScriptVector();
 }
