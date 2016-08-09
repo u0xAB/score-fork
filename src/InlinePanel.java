@@ -485,10 +485,10 @@ public class InlinePanel extends JPanel implements ActionListener
 			{
 			  userNotes.add(pitch);
 			  boolean match;
-                          if (ScriptVector.INSTANCE.notes.isEmpty())
-                                        match  = checkGameStatus(gameNotes, userNotes);
+                          if (gameType == appPrefs.INLINE_SINGLE_NOTES) 
+                           match       = pitch == ScriptVector.INSTANCE.currentPitch();
                           else
-                              match = pitch == ScriptVector.INSTANCE.currentNote().pitch;
+                              match = checkGameStatus(gameNotes, userNotes);
 			  if (match == true)
 			  {
 				updateGameStats(1);
@@ -778,6 +778,7 @@ public class InlinePanel extends JPanel implements ActionListener
             newNote.duration = 0; // set duration to 0 not to mess up X position
             newNote.xpos = noteXStartPos;
             gameNotes.add(newNote); //0xAB
+            ScriptVector.INSTANCE.setCurrentPitch(newNote.pitch);
             if (gameType == appPrefs.INLINE_LEARN_NOTES)
                 setLearningInfo(true, -1);
             System.out.println("Got note with pitch: " + newNote.pitch + " (level:" + newNote.level + ")");
@@ -790,6 +791,7 @@ public class InlinePanel extends JPanel implements ActionListener
             newNote.duration = 0; // set duration to 0 not to mess up X position
             newNote.xpos = noteXStartPos;
             setLevel(newNote);
+            if (gameType != appPrefs.INLINE_SINGLE_NOTES)
             piano.highlightKey(newNote.pitch, true);
             gameNotes.add(newNote); //0xAB
             if (gameType != appPrefs.INLINE_MORE_NOTES)
